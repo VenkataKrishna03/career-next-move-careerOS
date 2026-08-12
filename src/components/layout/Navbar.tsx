@@ -36,13 +36,20 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <BrandButton asChild variant="ghost" size="sm">
-            <Link to="/signin">Sign In</Link>
-          </BrandButton>
-          <BrandButton asChild size="sm">
-            <Link to="/signup">Get Started</Link>
-          </BrandButton>
+          {loading ? null : user ? (
+            <UserMenu user={user} />
+          ) : (
+            <>
+              <BrandButton asChild variant="ghost" size="sm">
+                <Link to="/signin">Sign In</Link>
+              </BrandButton>
+              <BrandButton asChild size="sm">
+                <Link to="/signup">Get Started</Link>
+              </BrandButton>
+            </>
+          )}
         </div>
+
 
         <button
           type="button"
