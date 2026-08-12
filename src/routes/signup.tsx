@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AuthLayout } from "@/components/layout/AuthLayout";
+import { GoogleAuthButton } from "@/components/auth/GoogleAuthButton";
+
 import { BrandButton } from "@/components/ui/brand-button";
 import { FormInput } from "@/components/ui/form-input";
 
