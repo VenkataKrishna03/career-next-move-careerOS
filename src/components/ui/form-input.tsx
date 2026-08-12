@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 type FormInputProps = ComponentProps<"input"> & {
   label: string;
-  error?: string;
+  error?: string | undefined;
 };
 
 export function FormInput({ label, error, id, className, ...props }: FormInputProps) {
@@ -37,7 +37,7 @@ export function FormInput({ label, error, id, className, ...props }: FormInputPr
 
 type FormTextareaProps = ComponentProps<"textarea"> & {
   label: string;
-  error?: string;
+  error?: string | undefined;
 };
 
 export function FormTextarea({
