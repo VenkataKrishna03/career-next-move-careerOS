@@ -78,17 +78,24 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-4 flex flex-col gap-3">
-              <BrandButton asChild variant="outline" size="full">
-                <Link to="/signin" onClick={() => setOpen(false)}>
-                  Sign In
-                </Link>
-              </BrandButton>
-              <BrandButton asChild size="full">
-                <Link to="/signup" onClick={() => setOpen(false)}>
-                  Get Started
-                </Link>
-              </BrandButton>
+              {loading ? null : user ? (
+                <UserMenu user={user} onNavigate={() => setOpen(false)} />
+              ) : (
+                <>
+                  <BrandButton asChild variant="outline" size="full">
+                    <Link to="/signin" onClick={() => setOpen(false)}>
+                      Sign In
+                    </Link>
+                  </BrandButton>
+                  <BrandButton asChild size="full">
+                    <Link to="/signup" onClick={() => setOpen(false)}>
+                      Get Started
+                    </Link>
+                  </BrandButton>
+                </>
+              )}
             </div>
+
           </nav>
         </div>
       ) : null}
