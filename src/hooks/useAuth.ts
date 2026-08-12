@@ -36,13 +36,13 @@ export function useAuth(): AuthState {
 export function getDisplayName(user: User | null): string {
   if (!user) return "";
   const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
-  const name = (meta.full_name || meta.name || meta.user_name) as string | undefined;
+  const name = (meta['full_name'] || meta['name'] || meta['user_name']) as string | undefined;
   return name || user.email?.split("@")[0] || "Account";
 }
 
 export function getAvatarUrl(user: User | null): string | undefined {
   const meta = (user?.user_metadata ?? {}) as Record<string, unknown>;
-  return (meta.avatar_url || meta.picture) as string | undefined;
+  return (meta['avatar_url'] || meta['picture']) as string | undefined;
 }
 
 export function getInitials(name: string): string {
