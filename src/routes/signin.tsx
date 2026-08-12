@@ -123,17 +123,8 @@ function SignInPage() {
         <span className="h-px flex-1 bg-border" />
       </div>
 
-      <BrandButton
-        type="button"
-        variant="outline"
-        size="full"
-        onClick={() =>
-          setNotice("Google sign-in will be connected in a future version.")
-        }
-      >
-        <GoogleIcon />
-        Continue with Google
-      </BrandButton>
+      <GoogleAuthButton />
+
     </AuthLayout>
   );
 }
