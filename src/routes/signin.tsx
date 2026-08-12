@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AuthLayout } from "@/components/layout/AuthLayout";
+import { GoogleAuthButton } from "@/components/auth/GoogleAuthButton";
 import { BrandButton } from "@/components/ui/brand-button";
 import { FormInput } from "@/components/ui/form-input";
+
 
 export const Route = createFileRoute("/signin")({
   head: () => ({
@@ -25,13 +27,6 @@ export const Route = createFileRoute("/signin")({
 
 type Errors = Partial<Record<"email" | "password", string>>;
 
-function GoogleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="size-4" aria-hidden="true" fill="currentColor">
-      <path d="M21.35 11.1H12v3.2h5.35c-.25 1.5-1.85 4.4-5.35 4.4a6.1 6.1 0 1 1 0-12.2c1.75 0 2.92.74 3.59 1.38l2.45-2.36C16.46 3.9 14.42 3 12 3a9 9 0 1 0 0 18c5.2 0 8.63-3.65 8.63-8.79 0-.59-.06-1.04-.28-1.11Z" />
-    </svg>
-  );
-}
 
 function SignInPage() {
   const [values, setValues] = useState({ email: "", password: "" });
@@ -123,17 +118,8 @@ function SignInPage() {
         <span className="h-px flex-1 bg-border" />
       </div>
 
-      <BrandButton
-        type="button"
-        variant="outline"
-        size="full"
-        onClick={() =>
-          setNotice("Google sign-in will be connected in a future version.")
-        }
-      >
-        <GoogleIcon />
-        Continue with Google
-      </BrandButton>
+      <GoogleAuthButton />
+
     </AuthLayout>
   );
 }
