@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { BrandButton } from "@/components/ui/brand-button";
+import { UserMenu } from "@/components/auth/UserMenu";
+import { useAuth } from "@/hooks/useAuth";
 
 const links = [
   { to: "/", label: "Home" },
@@ -12,6 +14,8 @@ const links = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const { user, loading } = useAuth();
+
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
