@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { BrandButton } from "@/components/ui/brand-button";
+import { UserMenu } from "@/components/auth/UserMenu";
+import { useAuth } from "@/hooks/useAuth";
 
 const links = [
   { to: "/", label: "Home" },
@@ -12,6 +14,8 @@ const links = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const { user, loading } = useAuth();
+
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
@@ -32,13 +36,20 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <BrandButton asChild variant="ghost" size="sm">
-            <Link to="/signin">Sign In</Link>
-          </BrandButton>
-          <BrandButton asChild size="sm">
-            <Link to="/signup">Get Started</Link>
-          </BrandButton>
+          {loading ? null : user ? (
+            <UserMenu user={user} />
+          ) : (
+            <>
+              <BrandButton asChild variant="ghost" size="sm">
+                <Link to="/signin">Sign In</Link>
+              </BrandButton>
+              <BrandButton asChild size="sm">
+                <Link to="/signup">Get Started</Link>
+              </BrandButton>
+            </>
+          )}
         </div>
+
 
         <button
           type="button"
@@ -67,17 +78,24 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-4 flex flex-col gap-3">
-              <BrandButton asChild variant="outline" size="full">
-                <Link to="/signin" onClick={() => setOpen(false)}>
-                  Sign In
-                </Link>
-              </BrandButton>
-              <BrandButton asChild size="full">
-                <Link to="/signup" onClick={() => setOpen(false)}>
-                  Get Started
-                </Link>
-              </BrandButton>
+              {loading ? null : user ? (
+                <UserMenu user={user} onNavigate={() => setOpen(false)} />
+              ) : (
+                <>
+                  <BrandButton asChild variant="outline" size="full">
+                    <Link to="/signin" onClick={() => setOpen(false)}>
+                      Sign In
+                    </Link>
+                  </BrandButton>
+                  <BrandButton asChild size="full">
+                    <Link to="/signup" onClick={() => setOpen(false)}>
+                      Get Started
+                    </Link>
+                  </BrandButton>
+                </>
+              )}
             </div>
+
           </nav>
         </div>
       ) : null}
