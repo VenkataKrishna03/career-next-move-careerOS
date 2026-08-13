@@ -6,6 +6,7 @@ import { BrandButton } from "@/components/ui/brand-button";
 import { FormInput, FormTextarea } from "@/components/ui/form-input";
 import { FeatureCard } from "@/components/ui/feature-card";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
