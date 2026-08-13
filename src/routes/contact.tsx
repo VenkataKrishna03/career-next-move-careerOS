@@ -171,8 +171,16 @@ function ContactPage() {
                   error={errors.message}
                   onChange={(e) => update("message")(e.target.value)}
                 />
-                <BrandButton type="submit" size="full">
-                  Send Message
+                {submitError ? (
+                  <p
+                    role="alert"
+                    className="rounded-lg border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+                  >
+                    {submitError}
+                  </p>
+                ) : null}
+                <BrandButton type="submit" size="full" disabled={sending}>
+                  {sending ? "Sending..." : "Send Message"}
                 </BrandButton>
               </form>
             )}
