@@ -55,11 +55,13 @@ function ContactPage() {
   });
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const update = (key: keyof typeof values) => (v: string) =>
     setValues((prev) => ({ ...prev, [key]: v }));
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const next: Errors = {};
     if (!values.name.trim()) next.name = "Please enter your full name.";
@@ -71,7 +73,25 @@ function ContactPage() {
       next.message = "Please write at least 10 characters.";
 
     setErrors(next);
-    if (Object.keys(next).length === 0) setSubmitted(true);
+    if (Object.keys(next).length > 0) return;
+
+    setSubmitError(null);
+    setSending(true);
+    const { error } = await supabase.from("contact_messages").insert({
+      full_name: values.name.trim().slice(0, 100),
+      email: values.email.trim().slice(0, 255),
+      subject: values.subject.trim().slice(0, 200),
+      message: values.message.trim().slice(0, 2000),
+    });
+    setSending(false);
+
+    if (error) {
+      setSubmitError("Something went wrong while sending your message. Please try again.");
+      return;
+    }
+
+    setValues({ name: "", email: "", subject: "", message: "" });
+    setSubmitted(true);
   }
 
   return (
