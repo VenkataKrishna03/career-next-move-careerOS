@@ -6,6 +6,7 @@ import { BrandButton } from "@/components/ui/brand-button";
 import { FormInput, FormTextarea } from "@/components/ui/form-input";
 import { FeatureCard } from "@/components/ui/feature-card";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -55,11 +56,13 @@ function ContactPage() {
   });
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const update = (key: keyof typeof values) => (v: string) =>
     setValues((prev) => ({ ...prev, [key]: v }));
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const next: Errors = {};
     if (!values.name.trim()) next.name = "Please enter your full name.";
@@ -71,7 +74,25 @@ function ContactPage() {
       next.message = "Please write at least 10 characters.";
 
     setErrors(next);
-    if (Object.keys(next).length === 0) setSubmitted(true);
+    if (Object.keys(next).length > 0) return;
+
+    setSubmitError(null);
+    setSending(true);
+    const { error } = await supabase.from("contact_messages").insert({
+      full_name: values.name.trim().slice(0, 100),
+      email: values.email.trim().slice(0, 255),
+      subject: values.subject.trim().slice(0, 200),
+      message: values.message.trim().slice(0, 2000),
+    });
+    setSending(false);
+
+    if (error) {
+      setSubmitError("Something went wrong while sending your message. Please try again.");
+      return;
+    }
+
+    setValues({ name: "", email: "", subject: "", message: "" });
+    setSubmitted(true);
   }
 
   return (
@@ -95,10 +116,11 @@ function ContactPage() {
             {submitted ? (
               <div className="flex flex-col items-start gap-4">
                 <CheckCircle2 className="size-8 text-primary" aria-hidden="true" />
-                <h2 className="text-xl font-semibold text-foreground">Message received</h2>
+                <h2 className="text-xl font-semibold text-foreground">
+                  Message sent successfully!
+                </h2>
                 <p role="status" className="text-sm leading-relaxed text-muted-foreground">
-                  Thanks for reaching out. Contact functionality will be connected in a
-                  future version.
+                  Thanks for reaching out. We'll get back to you soon.
                 </p>
                 <BrandButton
                   variant="outline"
@@ -149,8 +171,16 @@ function ContactPage() {
                   error={errors.message}
                   onChange={(e) => update("message")(e.target.value)}
                 />
-                <BrandButton type="submit" size="full">
-                  Send Message
+                {submitError ? (
+                  <p
+                    role="alert"
+                    className="rounded-lg border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+                  >
+                    {submitError}
+                  </p>
+                ) : null}
+                <BrandButton type="submit" size="full" disabled={sending}>
+                  {sending ? "Sending..." : "Send Message"}
                 </BrandButton>
               </form>
             )}
