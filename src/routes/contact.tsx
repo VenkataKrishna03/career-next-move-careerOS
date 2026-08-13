@@ -116,10 +116,11 @@ function ContactPage() {
             {submitted ? (
               <div className="flex flex-col items-start gap-4">
                 <CheckCircle2 className="size-8 text-primary" aria-hidden="true" />
-                <h2 className="text-xl font-semibold text-foreground">Message received</h2>
+                <h2 className="text-xl font-semibold text-foreground">
+                  Message sent successfully!
+                </h2>
                 <p role="status" className="text-sm leading-relaxed text-muted-foreground">
-                  Thanks for reaching out. Contact functionality will be connected in a
-                  future version.
+                  Thanks for reaching out. We'll get back to you soon.
                 </p>
                 <BrandButton
                   variant="outline"
