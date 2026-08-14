@@ -16,6 +16,12 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardAiInterviewRouteImport } from './routes/dashboard.ai-interview'
+import { Route as DashboardCareerAnalysisRouteImport } from './routes/dashboard.career-analysis'
+import { Route as DashboardResumeAnalyzerRouteImport } from './routes/dashboard.resume-analyzer'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
+import { Route as DashboardSkillGapRouteImport } from './routes/dashboard.skill-gap'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +58,36 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAiInterviewRoute = DashboardAiInterviewRouteImport.update({
+  id: '/dashboard/ai-interview',
+  path: '/dashboard/ai-interview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardCareerAnalysisRoute = DashboardCareerAnalysisRouteImport.update({
+  id: '/dashboard/career-analysis',
+  path: '/dashboard/career-analysis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardResumeAnalyzerRoute = DashboardResumeAnalyzerRouteImport.update({
+  id: '/dashboard/resume-analyzer',
+  path: '/dashboard/resume-analyzer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/dashboard/settings',
+  path: '/dashboard/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardSkillGapRoute = DashboardSkillGapRouteImport.update({
+  id: '/dashboard/skill-gap',
+  path: '/dashboard/skill-gap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +97,12 @@ export interface FileRoutesByFullPath {
   '/roadmap': typeof RoadmapRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
+  '/dashboard/ai-interview': typeof DashboardAiInterviewRoute
+  '/dashboard/career-analysis': typeof DashboardCareerAnalysisRoute
+  '/dashboard/resume-analyzer': typeof DashboardResumeAnalyzerRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/skill-gap': typeof DashboardSkillGapRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +112,12 @@ export interface FileRoutesByTo {
   '/roadmap': typeof RoadmapRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
+  '/dashboard/ai-interview': typeof DashboardAiInterviewRoute
+  '/dashboard/career-analysis': typeof DashboardCareerAnalysisRoute
+  '/dashboard/resume-analyzer': typeof DashboardResumeAnalyzerRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/skill-gap': typeof DashboardSkillGapRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +128,12 @@ export interface FileRoutesById {
   '/roadmap': typeof RoadmapRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
+  '/dashboard/ai-interview': typeof DashboardAiInterviewRoute
+  '/dashboard/career-analysis': typeof DashboardCareerAnalysisRoute
+  '/dashboard/resume-analyzer': typeof DashboardResumeAnalyzerRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/skill-gap': typeof DashboardSkillGapRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +145,12 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/signin'
     | '/signup'
+    | '/dashboard/ai-interview'
+    | '/dashboard/career-analysis'
+    | '/dashboard/resume-analyzer'
+    | '/dashboard/settings'
+    | '/dashboard/skill-gap'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +160,12 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/signin'
     | '/signup'
+    | '/dashboard/ai-interview'
+    | '/dashboard/career-analysis'
+    | '/dashboard/resume-analyzer'
+    | '/dashboard/settings'
+    | '/dashboard/skill-gap'
+    | '/dashboard'
   id:
     | '__root__'
     | '/'
@@ -109,6 +175,12 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/signin'
     | '/signup'
+    | '/dashboard/ai-interview'
+    | '/dashboard/career-analysis'
+    | '/dashboard/resume-analyzer'
+    | '/dashboard/settings'
+    | '/dashboard/skill-gap'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +191,12 @@ export interface RootRouteChildren {
   RoadmapRoute: typeof RoadmapRoute
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
+  DashboardAiInterviewRoute: typeof DashboardAiInterviewRoute
+  DashboardCareerAnalysisRoute: typeof DashboardCareerAnalysisRoute
+  DashboardResumeAnalyzerRoute: typeof DashboardResumeAnalyzerRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardSkillGapRoute: typeof DashboardSkillGapRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +250,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/ai-interview': {
+      id: '/dashboard/ai-interview'
+      path: '/dashboard/ai-interview'
+      fullPath: '/dashboard/ai-interview'
+      preLoaderRoute: typeof DashboardAiInterviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/career-analysis': {
+      id: '/dashboard/career-analysis'
+      path: '/dashboard/career-analysis'
+      fullPath: '/dashboard/career-analysis'
+      preLoaderRoute: typeof DashboardCareerAnalysisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/resume-analyzer': {
+      id: '/dashboard/resume-analyzer'
+      path: '/dashboard/resume-analyzer'
+      fullPath: '/dashboard/resume-analyzer'
+      preLoaderRoute: typeof DashboardResumeAnalyzerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/dashboard/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/skill-gap': {
+      id: '/dashboard/skill-gap'
+      path: '/dashboard/skill-gap'
+      fullPath: '/dashboard/skill-gap'
+      preLoaderRoute: typeof DashboardSkillGapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +303,12 @@ const rootRouteChildren: RootRouteChildren = {
   RoadmapRoute: RoadmapRoute,
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
+  DashboardAiInterviewRoute: DashboardAiInterviewRoute,
+  DashboardCareerAnalysisRoute: DashboardCareerAnalysisRoute,
+  DashboardResumeAnalyzerRoute: DashboardResumeAnalyzerRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardSkillGapRoute: DashboardSkillGapRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
