@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ChevronDown, LogOut, User as UserIcon } from "lucide-react";
+import { ChevronDown, LayoutDashboard, LogOut, User as UserIcon } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { getAvatarUrl, getDisplayName, getInitials } from "@/hooks/useAuth";
@@ -65,6 +65,12 @@ export function UserMenu({ user, onNavigate }: { user: User; onNavigate?: () => 
           </div>
         </div>
         <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link to="/dashboard" onClick={() => { setOpen(false); onNavigate?.(); }}>
+            <LayoutDashboard className="size-4" aria-hidden="true" />
+            Dashboard
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link to="/profile" onClick={() => { setOpen(false); onNavigate?.(); }}>
             <UserIcon className="size-4" aria-hidden="true" />

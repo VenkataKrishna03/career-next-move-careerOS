@@ -9,9 +9,9 @@ import {
   Map as MapIcon,
   Menu,
   Settings,
+  Sparkles,
   Target,
   User as UserIcon,
-  X,
 } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { BrandButton } from "@/components/ui/brand-button";
@@ -152,7 +152,7 @@ export function DashboardLayout({
 export function ComingSoon({ title, description }: { title: string; description: string }) {
   return (
     <div className={cn("mx-auto max-w-xl rounded-xl border border-border p-8 text-center")}>
-      <X className="mx-auto size-6 text-primary" aria-hidden="true" />
+      <Sparkles className="mx-auto size-6 text-primary" aria-hidden="true" />
       <h2 className="mt-4 font-heading text-xl font-bold text-foreground">{title}</h2>
       <p className="mt-2 text-sm text-muted-foreground">{description}</p>
       <div className="mt-6 flex justify-center">
