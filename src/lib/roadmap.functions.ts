@@ -21,7 +21,7 @@ Calibrate the timeline to the hours available per day. Be concrete and specific 
 export const generateRoadmap = createServerFn({ method: "POST" })
   .inputValidator((data: RoadmapInput) => data)
   .handler(async ({ data }): Promise<CareerRoadmap> => {
-    const apiKey = process.env["LOVABLE_API_KEY"];
+    const apiKey = process.env["GOOGLE_API_KEY"];
     if (!apiKey) throw new Error("AI is not configured for this project.");
 
     const userPrompt = `Current education: ${data.education}
