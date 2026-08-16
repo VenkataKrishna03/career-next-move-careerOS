@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -121,6 +122,7 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
+        <Toaster />
         <Scripts />
       </body>
     </html>
