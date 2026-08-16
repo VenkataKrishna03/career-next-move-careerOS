@@ -21,6 +21,7 @@ export type Database = {
           full_name: string
           id: string
           message: string
+          status: string
           subject: string
         }
         Insert: {
@@ -29,6 +30,7 @@ export type Database = {
           full_name: string
           id?: string
           message: string
+          status?: string
           subject: string
         }
         Update: {
@@ -37,6 +39,7 @@ export type Database = {
           full_name?: string
           id?: string
           message?: string
+          status?: string
           subject?: string
         }
         Relationships: []
