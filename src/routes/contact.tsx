@@ -1,12 +1,14 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
 import { CheckCircle2, GraduationCap, MessageSquare, Building2 } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { BrandButton } from "@/components/ui/brand-button";
 import { FormInput, FormTextarea } from "@/components/ui/form-input";
 import { FeatureCard } from "@/components/ui/feature-card";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { supabase } from "@/integrations/supabase/client";
+import { submitContact } from "@/lib/contact.functions";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
