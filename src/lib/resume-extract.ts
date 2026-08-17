@@ -14,7 +14,9 @@ export async function extractResumeText(file: File): Promise<string> {
   const buffer = await file.arrayBuffer();
 
   if (name.endsWith(".docx")) {
-    const mammoth = await import("mammoth/mammoth.browser.js");
+    const mammoth = (await import("mammoth/mammoth.browser.js" as string)) as {
+      extractRawText: (opts: { arrayBuffer: ArrayBuffer }) => Promise<{ value: string }>;
+    };
     const { value } = await mammoth.extractRawText({ arrayBuffer: buffer });
     return normalize(value);
   }
@@ -36,7 +38,7 @@ export async function extractResumeText(file: File): Promise<string> {
           .join(" "),
       );
     }
-    await doc.destroy();
+    void doc.cleanup();
     return normalize(pages.join("\n"));
   }
 
