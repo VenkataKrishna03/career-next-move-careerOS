@@ -129,7 +129,7 @@ ${data.resumeText}`;
         target_role: data.targetRole,
         job_description: data.jobDescription || null,
         score: result.score,
-        result: result as unknown as Record<string, unknown>,
+        result: result as unknown as import("@/integrations/supabase/types").Json,
       })
       .select("id, created_at")
       .single();
