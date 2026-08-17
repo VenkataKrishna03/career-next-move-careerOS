@@ -104,7 +104,7 @@ function ResumeAnalyzerPage() {
   const [file, setFile] = useState<File | null>(null);
   const [targetRole, setTargetRole] = useState("");
   const [jobDescription, setJobDescription] = useState("");
-  const [fieldErrors, setFieldErrors] = useState<{ file?: string; role?: string }>({});
+  const [fieldErrors, setFieldErrors] = useState<{ file?: string | undefined; role?: string | undefined }>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ResumeAnalysisRecord | null>(null);
@@ -124,7 +124,7 @@ function ResumeAnalyzerPage() {
 
   function onFileChange(e: ChangeEvent<HTMLInputElement>) {
     const next = e.target.files?.[0] ?? null;
-    setFieldErrors((prev) => ({ ...prev, file: undefined }));
+    setFieldErrors(({ file: _f, ...rest }) => rest);
     if (!next) return setFile(null);
     if (!isAcceptedResume(next)) {
       setFile(null);
