@@ -44,6 +44,48 @@ export type Database = {
         }
         Relationships: []
       }
+      interview_sessions: {
+        Row: {
+          communication_score: number
+          created_at: string
+          experience_level: string
+          id: string
+          interview_type: string
+          overall_score: number
+          question_count: number
+          result: Json
+          target_role: string
+          technical_score: number
+          user_id: string
+        }
+        Insert: {
+          communication_score?: number
+          created_at?: string
+          experience_level: string
+          id?: string
+          interview_type: string
+          overall_score?: number
+          question_count?: number
+          result: Json
+          target_role: string
+          technical_score?: number
+          user_id: string
+        }
+        Update: {
+          communication_score?: number
+          created_at?: string
+          experience_level?: string
+          id?: string
+          interview_type?: string
+          overall_score?: number
+          question_count?: number
+          result?: Json
+          target_role?: string
+          technical_score?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       resume_analyses: {
         Row: {
           created_at: string
